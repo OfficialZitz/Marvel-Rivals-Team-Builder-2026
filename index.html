@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marvel Rivals Team Builder – Free Comp & Synergy Checker | Elocarry</title>
+  <meta name="description" content="Build the perfect Marvel Rivals team comp. Analyse role balance, team-up synergies and tier ratings across all 47 heroes. Free tool — no login required." />
+  <link rel="canonical" href="https://officialzitz.github.io/Marvel-Rivals-Team-Builder-2026/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Elocarry" />
+  <meta property="og:title" content="Marvel Rivals Team Builder – Free Comp & Synergy Checker" />
+  <meta property="og:description" content="Pick your 6 heroes, get instant synergy scores, team-up combos and role-balance analysis. Free Marvel Rivals comp tool by Elocarry." />
+  <meta property="og:url" content="https://officialzitz.github.io/Marvel-Rivals-Team-Builder-2026/" />
+  <meta property="og:image" content="https://elocarry.net/wp-content/uploads/marvel-rivals-team-builder-og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@elocarry" />
+  <meta name="twitter:title" content="Marvel Rivals Team Builder – Free Comp & Synergy Checker" />
+  <meta name="twitter:description" content="Pick your 6 heroes, get instant synergy scores, team-up combos and role-balance analysis." />
+  <meta name="twitter:image" content="https://elocarry.net/wp-content/uploads/marvel-rivals-team-builder-og.jpg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Marvel Rivals Team Builder",
+    "url": "https://officialzitz.github.io/Marvel-Rivals-Team-Builder-2026/",
+    "description": "Free interactive team composition builder for Marvel Rivals. Select up to 6 heroes, analyse role balance, view team-up synergies and share your comp.",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
+    "author": { "@type": "Organization", "name": "Elocarry", "url": "https://elocarry.net" }
+  }
+  </script>
+</head>
+<body>
+<!-- ════════════════════════════════════════════════════════════
+     ELOCARRY — Marvel Rivals Team Builder
+     PASTE THIS INTO: Elementor → HTML Widget → HTML Code
+     DO NOT include anything above this comment.
+════════════════════════════════════════════════════════════ -->
+
+<!-- React + Babel — self-hosted for incognito/adblocker compatibility -->
+<script src="https://elocarry.net/wp-content/uploads/2026/04/react.production.min.js"></script>
+<script src="https://elocarry.net/wp-content/uploads/2026/04/react-dom.production.min.js"></script>
+<script src="https://elocarry.net/wp-content/uploads/2026/04/babel.min.js"></script>
+
+<!-- Fonts: Bebas Neue (headings) + Inter (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  #elocarry-mrb *, #elocarry-mrb *::before, #elocarry-mrb *::after { box-sizing:border-box; margin:0; padding:0; }
+  #elocarry-mrb { font-family:'Inter',sans-serif; background:#0E0E0E; color:#fff; min-height:100vh; position:relative; overflow-x:hidden; }
+  #elocarry-mrb h1, #elocarry-mrb h2 { font-family:'Bebas Neue',sans-serif; letter-spacing:0.5px; }
+  #elocarry-mrb .ec-hero-name { font-family:'Inter',sans-serif; }
+  #elocarry-mrb ::-webkit-scrollbar { width:4px; height:4px; }
+  #elocarry-mrb ::-webkit-scrollbar-track { background:#0E0E0E; }
+  #elocarry-mrb ::-webkit-scrollbar-thumb { background:rgba(49,198,60,0.3); border-radius:2px; }
+  #elocarry-mrb input { outline:none; font-family:inherit; }
+  #elocarry-mrb input::placeholder { color:#475569; }
+  #elocarry-mrb button { font-family:inherit; cursor:pointer; }
+  #elocarry-mrb p, #elocarry-mrb span, #elocarry-mrb div { line-height:inherit; }
+  #elocarry-mrb .ec-card-label { display:flex !important; align-items:center !important; justify-content:space-between !important; margin:0 !important; padding:0 !important; }
+  #elocarry-mrb .ec-card-label span { display:inline !important; margin:0 !important; padding:0 !important; font-size:9px !important; line-height:1.2 !important; }
+  #elocarry-mrb .ec-layout { display:grid; grid-template-columns:1fr 390px; gap:20px; }
+  #elocarry-mrb .ec-header-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  #elocarry-mrb .ec-header-actions { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  #elocarry-mrb .ec-filters { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; align-items:center; }
+  #elocarry-mrb .ec-hero-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:10px; }
+  #elocarry-mrb .ec-panel { display:flex; flex-direction:column; gap:16px; }
+  @media (max-width: 768px) {
+    #elocarry-mrb .ec-layout { grid-template-columns:1fr; }
+    #elocarry-mrb .ec-panel { order:-1; }
+    #elocarry-mrb .ec-hero-grid { grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+    #elocarry-mrb .ec-header-actions a[href*="cheats"] { display:none; }
+    #elocarry-mrb .ec-filters { gap:6px; }
+  }
+  @media (max-width: 480px) {
+    #elocarry-mrb .ec-hero-grid { grid-template-columns:repeat(2,1fr); gap:8px; }
+    #elocarry-mrb .ec-card-label span { font-size:11px !important; }
+    #elocarry-mrb .ec-card-name { font-size:13px !important; }
+    #elocarry-mrb { padding-bottom:20px; }
+  }
+  .ec-seo-block { background:#0E0E0E; border-top:1px solid rgba(255,255,255,0.06); padding:48px 24px; }
+  .ec-seo-block .ec-inner { max-width:900px; margin:0 auto; }
+  .ec-seo-block h2 { font-family:'Bebas Neue',sans-serif; font-size:28px; font-weight:400; letter-spacing:0.5px; color:#fff; margin-bottom:12px; }
+  .ec-seo-block h3 { font-family:'Bebas Neue',sans-serif; font-size:20px; font-weight:400; letter-spacing:0.5px; color:#31C63C; margin:28px 0 8px; }
+  .ec-seo-block p  { font-family:'Inter',sans-serif; font-size:14px; color:#94a3b8; line-height:1.8; margin-bottom:12px; }
+  .ec-seo-block ul { padding-left:20px; }
+  .ec-seo-block li { font-family:'Inter',sans-serif; font-size:14px; color:#94a3b8; line-height:1.8; margin-bottom:4px; }
+  .ec-faq { margin-top:40px; }
+  .ec-faq-item { border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:18px 20px; margin-bottom:10px; background:#0E0E0E; }
+  .ec-faq-item h3 { font-family:'Bebas Neue',sans-serif; font-size:18px; font-weight:400; letter-spacing:0.5px; color:#fff; margin-bottom:8px; }
+  .ec-faq-item p  { font-family:'Inter',sans-serif; font-size:13px; color:#94a3b8; line-height:1.7; margin:0; }
+</style>
+
+<!-- Tool mount point -->
+<div id="elocarry-mrb"></div>
+
+<!-- Static SEO content (crawlable without JS) -->
+<section class="ec-seo-block" aria-label="Marvel Rivals Team Builder Guide">
+  <div class="ec-inner">
+    <h2>Marvel Rivals Team Builder — How to Build the Best Comp</h2>
+    <p>The Elocarry Marvel Rivals Team Builder lets you select up to 6 heroes from the full Season 2 roster, instantly analyse role balance, detect active Team-Up combos, and generate a shareable link to your composition. Whether you're planning a ranked push or experimenting with off-meta builds, this free tool gives you the synergy data you need before you queue.</p>
+
+    <h3>What Is Role Balance in Marvel Rivals?</h3>
+    <p>Marvel Rivals uses three roles: <strong>Vanguards</strong> (tanks and frontline anchors), <strong>Duelists</strong> (damage dealers and assassins), and <strong>Strategists</strong> (healers and support). The standard meta balance is <strong>2-2-2</strong> — two of each role — though aggressive dive comps often run 1-3-2 and bunker comps can run 2-1-3.</p>
+    <p>Running zero Strategists is the most common mistake in ranked. Without a healer your team has no sustain and will lose attrition fights. The team builder flags this automatically and recommends the right Strategist for your existing picks.</p>
+
+    <h3>Best Marvel Rivals Team-Up Combos (Season 2, 2026)</h3>
+    <p>Team-Ups are passive synergy bonuses that activate automatically when specific hero pairs or groups are on the same team. The strongest combos right now:</p>
+    <ul>
+      <li><strong>Gamma Overdrive</strong> — Iron Man + Bruce Banner: Iron Man's repulsors gain 25% bonus damage and radiation stacks.</li>
+      <li><strong>Wakandan Elite</strong> — Black Panther + Storm: Storm's lightning charges Black Panther's claws with electric damage, enabling instant backline eliminations.</li>
+      <li><strong>Web Warriors</strong> — Spider-Man + Peni Parker: Peni's nest extends Spider-Man's movement speed, creating an almost un-dived dive/zone hybrid.</li>
+      <li><strong>Asgardian Pact</strong> — Loki + Thor: Loki's clones gain Asgardian armour with 50% longer duration and added lightning damage.</li>
+      <li><strong>Metal Storm</strong> — Magneto + Storm: Storm's weather amplifies Magneto's pull by 200%, creating a devastating lock-down combo.</li>
+      <li><strong>X-Men Unite</strong> — Any 2+ X-Men heroes: Wolverine, Psylocke, Storm, Gambit, Magik, Emma Frost, Rogue, Phoenix all qualify.</li>
+      <li><strong>Fantastic Four</strong> — Any 2+ Fantastic Four members: Mr. Fantastic, Invisible Woman, Human Torch, The Thing.</li>
+    </ul>
+
+    <h3>Marvel Rivals Tier List — S Tier Heroes (2026)</h3>
+    <ul>
+      <li><strong>Doctor Strange (Vanguard)</strong> — Best tank in ranked due to near-unmatched team utility.</li>
+      <li><strong>Invisible Woman (Vanguard)</strong> — Forcefield off-tank with top-tier defensive utility.</li>
+      <li><strong>Iron Man (Duelist)</strong> — Mobile aerial carry. Best paired with Bruce Banner for Gamma Overdrive.</li>
+      <li><strong>Black Panther (Duelist)</strong> — Best backline-kill potential in the roster.</li>
+      <li><strong>Hawkeye (Duelist)</strong> — Precision sniper with devastating burst.</li>
+      <li><strong>Psylocke (Duelist)</strong> — Psionic blade diver with extreme burst on isolated supports.</li>
+      <li><strong>Phoenix (Duelist)</strong> — Cosmic burst mage with resurrection. High difficulty, S-tier ceiling.</li>
+      <li><strong>Mantis (Strategist)</strong> — Best healer in the game. Easy to play, huge damage amplification.</li>
+      <li><strong>Luna Snow (Strategist)</strong> — Ice healer with dual damage/support mode.</li>
+    </ul>
+
+    <h3>How to Use This Tool</h3>
+    <p>Click any hero card in the grid to add them to your team (up to 6). Use the role filter buttons to browse by Vanguard, Duelist, or Strategist, or search by name. Your team panel on the right shows live synergy scoring, role balance, and all active Team-Up combos. Hit <strong>Share</strong> to generate a URL you can post to Reddit, Discord, or send to teammates.</p>
+
+    <div class="ec-faq" id="faq">
+      <h2 style="margin-bottom:20px;">Frequently Asked Questions</h2>
+      <div class="ec-faq-item">
+        <h3>What is the best team comp in Marvel Rivals?</h3>
+        <p>The best Marvel Rivals team comp in 2026 typically runs 2-2-2 (two Vanguards, two Duelists, two Strategists). Strong picks include Doctor Strange or Magneto as frontline, Iron Man or Black Panther as carries, and Luna Snow or Mantis for healing.</p>
+      </div>
+      <div class="ec-faq-item">
+        <h3>How do Team-Ups work in Marvel Rivals?</h3>
+        <p>Team-Ups are passive bonuses that activate automatically when specific hero combinations are on the same team. For example, Gamma Overdrive activates when Iron Man and Bruce Banner are both selected, buffing Iron Man's repulsors with 25% bonus damage.</p>
+      </div>
+      <div class="ec-faq-item">
+        <h3>What is the best role balance for a Marvel Rivals team?</h3>
+        <p>The standard meta balance is 2-2-2: two Vanguards, two Duelists, and two Strategists. Alternative viable setups include 1-3-2 for aggressive dive and 2-1-3 for defensive bunker play.</p>
+      </div>
+      <div class="ec-faq-item">
+        <h3>Which Marvel Rivals heroes have the best synergy?</h3>
+        <p>Top synergy pairings include: Iron Man + Bruce Banner (Gamma Overdrive), Spider-Man + Peni Parker (Web Warriors), Black Panther + Storm (Wakandan Elite), Loki + Thor (Asgardian Pact), and Magneto + Storm (Metal Storm).</p>
+      </div>
+      <div class="ec-faq-item">
+        <h3>Is the Marvel Rivals Team Builder free?</h3>
+        <p>Yes — completely free, no account required. You can build and analyse team compositions, share them via URL, and save builds locally in your browser. All 47 heroes and 15 Team-Up combos included.</p>
+      </div>
+      <div class="ec-faq-item">
+        <h3>Does this tool work on mobile?</h3>
+        <p>Yes, the team builder is fully responsive and works on mobile browsers. The hero grid adapts to screen width and the team panel stacks below the grid on smaller screens.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:32px;font-size:12px;color:#475569;">
+      Fan-made tool. Not affiliated with Marvel Entertainment® or NetEase Games®.
+      <a href="https://elocarry.net/cheats/marvel-rivals/" style="color:#475569;">Marvel Rivals cheats</a> available at Elocarry.
+    </p>
+  </div>
+</section>
+
+<script type="text/babel">
+  const { useState, useEffect, useCallback } = React;
+
+  const T = {
+    bgPage:"#0E0E0E",bgCard:"#1a1a1a",bgItem:"#1a1a1a",bgNested:"#222",
+    green:"#31C63C",greenHover:"#34A853",greenBg:"rgba(49,198,60,0.15)",greenBorder:"rgba(49,198,60,0.3)",
+    fontHead:"'Bebas Neue',sans-serif",fontBody:"'Inter',sans-serif",
+    borderDefault:"rgba(255,255,255,0.1)",borderHover:"rgba(255,255,255,0.2)",borderSubtle:"rgba(255,255,255,0.05)",
+    textPrimary:"#fff",textSecondary:"#94a3b8",textMuted:"#64748b",textDisabled:"#475569",
+    success:{bg:"rgba(16,185,129,0.2)",text:"#34d399",border:"rgba(16,185,129,0.3)"},
+    warning:{bg:"rgba(245,158,11,0.2)",text:"#fbbf24",border:"rgba(245,158,11,0.3)"},
+    error:{bg:"rgba(239,68,68,0.2)",text:"#f87171",border:"rgba(239,68,68,0.3)"},
+    neutral:{bg:"rgba(100,116,139,0.2)",text:"#94a3b8",border:"rgba(100,116,139,0.3)"},
+    tr:"all 0.2s ease",
+  };
+
+  const ROLE={Vanguard:"#f87171",Duelist:"#60a5fa",Strategist:"#34d399"};
+  const ROLE_ICON={Vanguard:"🛡️",Duelist:"⚔️",Strategist:"💊"};
+  const TIER_CLR={S:"#fbbf24",A:"#fb923c",B:"#94a3b8",C:"#64748b"};
+  const DIFF_CLR={Easy:"#34d399",Medium:"#fbbf24",Hard:"#f87171"};
+
+  const HEROES=[
+    {id:"groot",name:"Groot",cls:"Vanguard",diff:"Easy",tier:"B",playstyle:"Wall-creating zone anchor",sa:["Dive comps","High-mobility"],wa:["Fire damage","Sustained poke"],clr:"#5d4037",slug:"groot"},
+    {id:"magneto",name:"Magneto",cls:"Vanguard",diff:"Medium",tier:"A",playstyle:"Magnetic field controller",sa:["Projectile heroes","Iron targets"],wa:["Non-metal abilities","Burst dmg"],clr:"#c0392b",slug:"magneto"},
+    {id:"doctor-strange",name:"Doctor Strange",cls:"Vanguard",diff:"Hard",tier:"S",playstyle:"Portal utility disruptor",sa:["Dive comps","Grouped enemies"],wa:["Long-range poke","Silences"],clr:"#8e44ad",slug:"doctor-strange"},
+    {id:"venom",name:"Venom",cls:"Vanguard",diff:"Medium",tier:"A",playstyle:"Aggressive dive tank / initiator",sa:["Isolated targets","Backliners"],wa:["Sonic abilities","Fire damage"],clr:"#1a1a2e",slug:"venom"},
+    {id:"peni-parker",name:"Peni Parker",cls:"Vanguard",diff:"Medium",tier:"A",playstyle:"Nest defender / area denial tank",sa:["Dive comps","Close-range duelists"],wa:["Long-range poke","Siege comps"],clr:"#e91e8c",slug:"peni-parker"},
+    {id:"captain-america",name:"Captain America",cls:"Vanguard",diff:"Easy",tier:"B",playstyle:"Frontline shield disruptor",sa:["Grouped enemies","Flankers"],wa:["Long-range burst","Aerial duelists"],clr:"#1565c0",slug:"captain-america"},
+    {id:"thor",name:"Thor",cls:"Vanguard",diff:"Medium",tier:"A",playstyle:"Aerial dive tank / crowd controller",sa:["Grouped enemies","Ground tanks"],wa:["Sustained poke","Kiting comps"],clr:"#1a237e",slug:"thor"},
+    {id:"the-thing",name:"The Thing",cls:"Vanguard",diff:"Easy",tier:"B",playstyle:"Immovable object / brawler anchor",sa:["Close-range brawlers","Divers"],wa:["Ranged poke","Kiting comps"],clr:"#bf8c5a",slug:"the-thing"},
+    {id:"invisible-woman",name:"Invisible Woman",cls:"Vanguard",diff:"Hard",tier:"S",playstyle:"Forcefield utility off-tank",sa:["Dive comps","Burst damage"],wa:["AoE damage","Reveal abilities"],clr:"#29b6f6",slug:"invisible-woman"},
+    {id:"mister-fantastic",name:"Mister Fantastic",cls:"Vanguard",diff:"Hard",tier:"A",playstyle:"Elastic brawler / zone controller",sa:["Melee fighters","Grouped enemies"],wa:["Ranged comps","Crowd control"],clr:"#0288d1",slug:"mister-fantastic"},
+    {id:"bruce-banner",name:"Bruce Banner",cls:"Vanguard",diff:"Medium",tier:"A",playstyle:"Transforming tank — Hulk on trigger",sa:["Single targets","Squishies"],wa:["Burst before transform","Poke"],clr:"#2e7d32",slug:"bruce-banner"},
+    {id:"namor",name:"Namor",cls:"Vanguard",diff:"Medium",tier:"B",playstyle:"Aquatic brawler / spawn controller",sa:["Ground-based tanks","Clustered"],wa:["Anti-air","High burst divers"],clr:"#006064",slug:"namor"},
+    {id:"iron-man",name:"Iron Man",cls:"Duelist",diff:"Medium",tier:"S",playstyle:"Mobile aerial damage dealer",sa:["Slow tanks","Clustered enemies"],wa:["Anti-air","High-mobility assassins"],clr:"#c0392b",slug:"iron-man"},
+    {id:"spider-man",name:"Spider-Man",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"High-mobility flank diver",sa:["Isolated backline","Slow supports"],wa:["CC-heavy comps","Peni Parker"],clr:"#1565c0",slug:"spider-man"},
+    {id:"black-panther",name:"Black Panther",cls:"Duelist",diff:"Hard",tier:"S",playstyle:"Vibranium high-skill assassin",sa:["Isolated backliners","Supports"],wa:["CC-heavy tanks","Group peel"],clr:"#6a1b9a",slug:"black-panther"},
+    {id:"scarlet-witch",name:"Scarlet Witch",cls:"Duelist",diff:"Medium",tier:"A",playstyle:"Reality-warping burst mage",sa:["Ability-dependent heroes"],wa:["Long-range poke","High sustain"],clr:"#c62828",slug:"scarlet-witch"},
+    {id:"storm",name:"Storm",cls:"Duelist",diff:"Medium",tier:"A",playstyle:"Area denial / zone controller",sa:["Grouped comps","Ground tanks"],wa:["High-mobility divers","Shields"],clr:"#0277bd",slug:"storm"},
+    {id:"black-widow",name:"Black Widow",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"Precision sniper / burst assassin",sa:["Stationary targets","Low-health"],wa:["Dive comps","Shields"],clr:"#212121",slug:"black-widow"},
+    {id:"blade",name:"Blade",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Lifesteal melee diver",sa:["Single targets","Supports"],wa:["AoE damage","CC comps"],clr:"#37474f",slug:"blade"},
+    {id:"deadpool",name:"Deadpool",cls:"Duelist",diff:"Medium",tier:"A",playstyle:"Regenerating brawler / disruptor",sa:["Sustained fight comps","Dive"],wa:["Burst one-shots","Hard CC"],clr:"#c62828",slug:"deadpool"},
+    {id:"elsa-bloodstone",name:"Elsa Bloodstone",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Monster hunter / sustained marksman",sa:["Large hitbox targets","Tanks"],wa:["High-mobility targets","Shields"],clr:"#ad1457",slug:"elsa-bloodstone"},
+    {id:"gambit",name:"Gambit",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"Explosive kinetic card caster",sa:["Grouped enemies","Close-range tanks"],wa:["Long-range comps","Mobile targets"],clr:"#7b1fa2",slug:"gambit"},
+    {id:"hawkeye",name:"Hawkeye",cls:"Duelist",diff:"Hard",tier:"S",playstyle:"Precision long-range sniper",sa:["Stationary targets","Low-health"],wa:["Dive comps","Close-range brawlers"],clr:"#37474f",slug:"hawkeye"},
+    {id:"hela",name:"Hela",cls:"Duelist",diff:"Medium",tier:"A",playstyle:"Ranged aerial bone spike caster",sa:["Grouped targets","Low-mobility"],wa:["Shields","High-mobility divers"],clr:"#1b5e20",slug:"hela"},
+    {id:"human-torch",name:"Human Torch",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Aerial pyro zone burner",sa:["Groot","Ground-based tanks"],wa:["Anti-air","Long-range snipers"],clr:"#e65100",slug:"human-torch"},
+    {id:"iron-fist",name:"Iron Fist",cls:"Duelist",diff:"Hard",tier:"B",playstyle:"Chi-powered melee assassin",sa:["Supports","Isolated targets"],wa:["AoE poke","CC-heavy tanks"],clr:"#33691e",slug:"iron-fist"},
+    {id:"angela",name:"Angela",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"Aggressive melee dive fighter",sa:["Backliners","Isolated targets"],wa:["CC comps","Burst damage"],clr:"#f9a825",slug:"angela"},
+    {id:"moon-knight",name:"Moon Knight",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Lunar-powered versatile skirmisher",sa:["Grouped enemies","Predictable tanks"],wa:["Sustained burst","High mobility"],clr:"#eceff1",slug:"moon-knight"},
+    {id:"daredevil",name:"Daredevil",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"Radar-sense melee assassin",sa:["Low-health backliners","Supports"],wa:["AoE damage","Hard CC"],clr:"#b71c1c",slug:"daredevil"},
+    {id:"magik",name:"Magik",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"Portal teleport assassin",sa:["Isolated supports","Low-health"],wa:["Burst comps","AoE CC"],clr:"#4527a0",slug:"magik"},
+    {id:"emma-frost",name:"Emma Frost",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Diamond form brawler / telepath",sa:["Ability-reliant heroes","Supports"],wa:["Sustained physical dmg","Burn"],clr:"#b0bec5",slug:"emma-frost"},
+    {id:"psylocke",name:"Psylocke",cls:"Duelist",diff:"Hard",tier:"S",playstyle:"Psionic blade diver / burst assassin",sa:["Isolated targets","Low-health supports"],wa:["AoE poke","Hard CC"],clr:"#6a1b9a",slug:"psylocke"},
+    {id:"phoenix",name:"Phoenix",cls:"Duelist",diff:"Hard",tier:"S",playstyle:"Cosmic burst mage / resurrection",sa:["Grouped enemies","Ability-reliant"],wa:["Burst before ult","Silences"],clr:"#e65100",slug:"phoenix"},
+    {id:"star-lord",name:"Star-Lord",cls:"Duelist",diff:"Easy",tier:"B",playstyle:"Dual-pistol mobile skirmisher",sa:["Medium-range targets","Supports"],wa:["Long-range snipers","Shield tanks"],clr:"#e53935",slug:"star-lord"},
+    {id:"rogue",name:"Rogue",cls:"Duelist",diff:"Medium",tier:"A",playstyle:"Power-stealing melee brawler",sa:["Ability-reliant heroes","Tanks"],wa:["Ranged burst","CC comps"],clr:"#1b5e20",slug:"rogue"},
+    {id:"wolverine",name:"Wolverine",cls:"Duelist",diff:"Easy",tier:"A",playstyle:"Adamantium regen brawler diver",sa:["Supports","Attrition fights"],wa:["Burst one-shots","Hard CC"],clr:"#f57f17",slug:"wolverine"},
+    {id:"winter-soldier",name:"Winter Soldier",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Arm-cannon burst skirmisher",sa:["Medium-range targets","Low-health"],wa:["Long-range snipers","Dive comps"],clr:"#37474f",slug:"winter-soldier"},
+    {id:"squirrel-girl",name:"Squirrel Girl",cls:"Duelist",diff:"Easy",tier:"B",playstyle:"Acorn-lobbing area poke dealer",sa:["Stationary targets","Tanks"],wa:["Mobile targets","Shields"],clr:"#8d6e63",slug:"squirrel-girl"},
+    {id:"cloak-dagger",name:"Cloak & Dagger",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"Dual-mode burst / utility hybrid",sa:["Grouped enemies","Low-health"],wa:["Sustained tanks","Heavy CC"],clr:"#4a148c",slug:"cloak-dagger"},
+    {id:"ultron",name:"Ultron",cls:"Duelist",diff:"Medium",tier:"A",playstyle:"Swarming drone AI dealer",sa:["Grouped enemies","Supports"],wa:["Point-blank brawlers","Hard CC"],clr:"#455a64",slug:"ultron"},
+    {id:"mantis",name:"Mantis",cls:"Strategist",diff:"Easy",tier:"S",playstyle:"Empathic healer / damage amplifier",sa:["Attrition battles","Burst-heavy comps"],wa:["Burst assassins","Dive comps"],clr:"#558b2f",slug:"mantis"},
+    {id:"rocket-raccoon",name:"Rocket Raccoon",cls:"Strategist",diff:"Medium",tier:"A",playstyle:"Technical support / turret engineer",sa:["Stationary tanks","Bunkers"],wa:["Divers","Close assassins"],clr:"#bf360c",slug:"rocket-raccoon"},
+    {id:"loki",name:"Loki",cls:"Strategist",diff:"Hard",tier:"A",playstyle:"Deceptive support / clone disruptor",sa:["Target-dependent enemies"],wa:["AoE damage","Reveal abilities"],clr:"#1b5e20",slug:"loki"},
+    {id:"adam-warlock",name:"Adam Warlock",cls:"Strategist",diff:"Hard",tier:"A",playstyle:"Cosmic healer / revival specialist",sa:["Attrition battles","Burst comps"],wa:["Divers","Silences"],clr:"#f57f17",slug:"adam-warlock"},
+    {id:"jeff",name:"Jeff the Land Shark",cls:"Strategist",diff:"Easy",tier:"A",playstyle:"Burrowing support / chaotic healer",sa:["Grouped enemies","Distracted targets"],wa:["Burst damage","Reveal abilities"],clr:"#0288d1",slug:"jeff"},
+    {id:"luna-snow",name:"Luna Snow",cls:"Strategist",diff:"Medium",tier:"S",playstyle:"Ice healer / dual-mode damage+support",sa:["Attrition comps","Sustained fights"],wa:["Burst assassins","Dive comps"],clr:"#b3e5fc",slug:"luna-snow"},
+  ];
+
+  const TEAM_UPS=[
+    {id:"gamma-overdrive",name:"Gamma Overdrive",heroes:["Iron Man","Bruce Banner"],effect:"Iron Man's repulsors become gamma-charged — 25% bonus damage + radiation stacks",impact:"Massive damage spike on Iron Man"},
+    {id:"guardians-protocol",name:"Guardians Protocol",heroes:["Rocket Raccoon","Star-Lord","Groot","Mantis"],min:2,effect:"All Guardians gain 15% damage boost and a shared health buffer",impact:"Near-unstoppable in sustained fights"},
+    {id:"arcane-conduit",name:"Arcane Conduit",heroes:["Doctor Strange","Scarlet Witch"],effect:"Scarlet Witch channels power through Strange's shields for 8s of AoE burst",impact:"Devastating on clustered teams"},
+    {id:"web-warriors",name:"Web Warriors",heroes:["Spider-Man","Peni Parker"],effect:"Shared web network — Peni's nest extends Spider-Man's movement speed",impact:"Ultimate dive/deny space control combo"},
+    {id:"asgardian-pact",name:"Asgardian Pact",heroes:["Loki","Thor"],effect:"Loki's clones gain Asgardian armor — 50% longer duration + lightning damage",impact:"Loki's disruption becomes near-unshuttable"},
+    {id:"metal-storm",name:"Metal Storm",heroes:["Magneto","Storm"],effect:"Storm's weather magnetizes armour, amplifying Magneto's pull by 200%",impact:"Devastating lock-down combo"},
+    {id:"cosmic-surge",name:"Cosmic Surge",heroes:["Star-Lord","Adam Warlock"],effect:"Adam Warlock revives Star-Lord with full ultimate charge prioritised",impact:"Potential infinite resurrection loop"},
+    {id:"stark-protocol",name:"Stark Protocol",heroes:["Iron Man","Winter Soldier"],effect:"Winter Soldier's arm cannon gets Stark upgrades — auto-targeting + 20% fire rate",impact:"Overwhelming sustained damage platform"},
+    {id:"symbiote-surge",name:"Symbiote Surge",heroes:["Venom","Spider-Man"],effect:"Venom's tendrils root Spider-Man's webbed enemies for 2 extra seconds",impact:"Perfect dive combo — web then lock-down"},
+    {id:"wakandan-elite",name:"Wakandan Elite",heroes:["Black Panther","Storm"],effect:"Storm's lightning empowers Black Panther's vibranium claws with electric damage",impact:"Stun + burst = instant backline kill"},
+    {id:"lunar-cycle",name:"Lunar Cycle",heroes:["Moon Knight","Loki"],effect:"Loki's illusions deal 30% of Moon Knight's DPS via lunar energy",impact:"Insane off-damage — very hard to counter"},
+    {id:"mystic-ward",name:"Mystic Ward",heroes:["Doctor Strange","Adam Warlock"],effect:"Doctor Strange's portals tether to Warlock's soul magic — allies revive at portals",impact:"Passive resurrections + portal repositioning"},
+    {id:"x-men-unite",name:"X-Men Unite",heroes:["Wolverine","Psylocke","Storm","Gambit","Magik","Emma Frost","Rogue","Phoenix"],min:2,effect:"X-Men members share a combat boost and generate team shield on kills",impact:"Snowball potential with multiple X-Men heroes"},
+    {id:"fantastic-four",name:"Fantastic Four",heroes:["Mister Fantastic","Invisible Woman","Human Torch","The Thing"],min:2,effect:"Fantastic Four members boost each other's abilities and share a linked barrier",impact:"Incredible team cohesion for sustained fights"},
+    {id:"midnight-sons",name:"Midnight Sons",heroes:["Blade","Moon Knight","Elsa Bloodstone"],min:2,effect:"All Midnight Sons deal bonus occult damage and resist life-drain",impact:"Strong vs heavy-healing comps"},
+  ];
+
+  function detectTeamUps(team){const names=team.map(h=>h.name);return TEAM_UPS.filter(tu=>{const req=tu.min||tu.heroes.length;return tu.heroes.filter(h=>names.includes(h)).length>=Math.min(2,req);});}
+  function getSynergyScore(team){if(!team.length)return 0;let s=0;const v=team.filter(h=>h.cls==="Vanguard").length,d=team.filter(h=>h.cls==="Duelist").length,st=team.filter(h=>h.cls==="Strategist").length;if(v>=1)s+=18;if(st>=1)s+=22;if(d>=1)s+=12;s+=detectTeamUps(team).length*9;if(v>=1&&d>=2&&st>=1)s+=18;if(team.length===6)s+=10;return Math.min(s,100);}
+  function getAnalysis(team){const insights=[],recs=[],v=team.filter(h=>h.cls==="Vanguard").length,d=team.filter(h=>h.cls==="Duelist").length,st=team.filter(h=>h.cls==="Strategist").length,n=team.length;if(st===0&&n>=3){insights.push({type:"warning",msg:"No Strategist — zero healing or support"});recs.push("Add Luna Snow, Mantis, Adam Warlock, Rocket Raccoon, Loki, or Jeff the Land Shark");}if(v===0&&n>=3){insights.push({type:"warning",msg:"No Vanguard — no frontline or tank presence"});recs.push("Add Groot, Magneto, Thor, Venom, Captain America, or The Thing");}if(d>=4){insights.push({type:"error",msg:"Too many Duelists — team is fragile, no sustain"});recs.push("Replace 1–2 Duelists with a Vanguard and a Strategist");}if(st>=3){insights.push({type:"neutral",msg:"Heavy support lineup — damage may be low"});recs.push("Swap one Strategist for a hard-hitting Duelist");}if(v>=3){insights.push({type:"neutral",msg:"Triple frontline — survivability high but damage may lack"});recs.push("Add at least one carry Duelist");}if(v>=1&&d>=2&&st>=1&&n>=4)insights.push({type:"success",msg:"Balanced core — solid frontline, damage, and support"});if(n===6&&st>=1&&v>=1&&d>=1)insights.push({type:"success",msg:"Full team with all roles covered — strong composition"});const tus=detectTeamUps(team);if(tus.length>=2)insights.push({type:"success",msg:`${tus.length} Team-Ups active — excellent hero synergy`});return{insights,recs};}
+  function encodeTeam(t){return t.map(h=>h.id).join(",");}
+  function decodeTeam(s){return s.split(",").map(id=>HEROES.find(h=>h.id===id)).filter(Boolean);}
+
+  // Hero images — self-hosted on elocarry.net
+  const EC = "https://elocarry.net/wp-content/uploads/2026/04/";
+  const HERO_IMG = {
+    "groot":           EC+"Groot.webp",
+    "magneto":         EC+"Magneto.webp",
+    "doctor-strange":  EC+"Doctor-Strange.webp",
+    "venom":           EC+"Venom.webp",
+    "peni-parker":     EC+"Peni-Parker.webp",
+    "captain-america": EC+"Captain-America.webp",
+    "thor":            EC+"Thor.webp",
+    "the-thing":       EC+"The-Thing.webp",
+    "invisible-woman": EC+"Invisible-Woman.webp",
+    "mister-fantastic":EC+"Mister-Fantastic.webp",
+    "bruce-banner":    EC+"Hulk.webp",
+    "namor":           EC+"Namor.webp",
+    "iron-man":        EC+"Iron-Man.webp",
+    "spider-man":      EC+"Spider-man.webp",
+    "black-panther":   EC+"Black-Panther.webp",
+    "scarlet-witch":   EC+"Scarlet-Witch.webp",
+    "storm":           EC+"Storm.webp",
+    "black-widow":     EC+"Black-Widow.webp",
+    "blade":           EC+"Blade.webp",
+    "deadpool":        EC+"Deadpool.webp",
+    "elsa-bloodstone": EC+"Elsa-Bloodstone.webp",
+    "gambit":          EC+"Gambit.webp",
+    "hawkeye":         EC+"Hawkeye.webp",
+    "hela":            EC+"Hela.webp",
+    "human-torch":     EC+"Human-Torch.webp",
+    "iron-fist":       EC+"Iron-Fist.webp",
+    "angela":          EC+"Angela.webp",
+    "moon-knight":     EC+"Moon-Knight.webp",
+    "daredevil":       EC+"Daredevil.webp",
+    "magik":           EC+"Magik.webp",
+    "emma-frost":      EC+"Emma-Frost.webp",
+    "psylocke":        EC+"Psylocke.webp",
+    "phoenix":         EC+"Phoenix.webp",
+    "star-lord":       EC+"Star-Lord.webp",
+    "rogue":           EC+"Rogue.webp",
+    "wolverine":       EC+"Wolverine.webp",
+    "winter-soldier":  EC+"Winter-Soldier.webp",
+    "squirrel-girl":   EC+"Squirrel-Girl.webp",
+    "cloak-dagger":    EC+"Cloak-Dagger.webp",
+    "ultron":          EC+"Ultron.webp",
+    "mantis":          EC+"Mantis.webp",
+    "rocket-raccoon":  EC+"Rocket-Raccoon.webp",
+    "loki":            EC+"Loki.webp",
+    "adam-warlock":    EC+"Adam-Warlock.webp",
+    "jeff":            EC+"Jeff-The-Land-Shark.webp",
+    "luna-snow":       EC+"Luna-Snow.webp",
+  };
+
+  function HeroImage({hero,style={}}){
+    const[failed,setFailed]=useState(false);
+    const src=HERO_IMG[hero.id];
+    if(failed||!src)return(
+      <div style={{...style,background:`linear-gradient(135deg,${hero.clr}dd,${hero.clr}55)`,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:4}}>
+        <div style={{fontSize:style.height>60?32:20}}>{ROLE_ICON[hero.cls]}</div>
+        <div style={{fontSize:9,fontWeight:700,color:"#fff",textAlign:"center",padding:"0 4px",lineHeight:1.2,opacity:0.9}}>{hero.name.split(" ")[0].toUpperCase()}</div>
+      </div>
+    );
+    return <img src={src} alt={`${hero.name} Marvel Rivals`} loading="lazy" onError={()=>setFailed(true)} style={{objectFit:"contain",objectPosition:"center",display:"block",background:hero.clr+"22",...style}}/>;
+  }
+
+  const SM={success:T.success,warning:T.warning,error:T.error,neutral:T.neutral};
+  const Badge=({type="success",children})=>{const s=SM[type]||T.neutral;return <span style={{display:"inline-flex",alignItems:"center",padding:"2px 8px",borderRadius:4,fontSize:10,fontWeight:600,background:s.bg,color:s.text,border:`1px solid ${s.border}`}}>{children}</span>;};
+  const IconBox=({size="md",icon})=>{const dim=size==="lg"?56:size==="sm"?40:48,fs=size==="lg"?24:size==="sm"?18:20;return <div style={{width:dim,height:dim,borderRadius:12,flexShrink:0,background:T.bgItem,display:"flex",alignItems:"center",justifyContent:"center",fontSize:fs}}>{icon}</div>;};
+
+  function Btn({onClick,disabled,children,variant="primary",active,style={}}){
+    const[h,sh]=useState(false);
+    const base={border:"none",borderRadius:8,fontFamily:"'Inter',sans-serif",fontWeight:variant==="primary"?700:600,fontSize:13,cursor:disabled?"default":"pointer",transition:T.tr,whiteSpace:"nowrap",...style};
+    if(variant==="primary")return <button onClick={onClick} disabled={disabled} onMouseEnter={()=>sh(true)} onMouseLeave={()=>sh(false)} style={{...base,background:disabled?T.bgNested:h?"#34A853E0":T.green,color:disabled?T.textDisabled:"#fff",padding:"8px 18px"}}>{children}</button>;
+    if(variant==="outline")return <button onClick={onClick} onMouseEnter={()=>sh(true)} onMouseLeave={()=>sh(false)} style={{...base,background:active?T.bgItem:h?"rgba(255,255,255,0.05)":"transparent",color:active?"#fff":h?"#fff":T.textSecondary,border:`1px solid ${active||h?T.borderHover:T.borderDefault}`,padding:"7px 14px",fontSize:12}}>{children}</button>;
+    return <button onClick={onClick} onMouseEnter={()=>sh(true)} onMouseLeave={()=>sh(false)} style={{...base,background:h?"rgba(255,255,255,0.05)":"transparent",color:h?"#fff":T.textSecondary,padding:"6px 12px",fontWeight:500,fontSize:12}}>{children}</button>;
+  }
+
+  const Card=({children,style={}})=><div style={{background:T.bgCard,border:`1px solid ${T.borderDefault}`,borderRadius:16,...style}}>{children}</div>;
+
+  function PillTabs({tabs,active,onChange}){return <div style={{display:"flex",gap:4,padding:4,background:T.bgCard,borderRadius:12,border:`1px solid ${T.borderDefault}`}}>{tabs.map(t=>{const on=active===t.id;return <button key={t.id} onClick={()=>onChange(t.id)} style={{display:"flex",alignItems:"center",gap:6,padding:"8px 14px",borderRadius:8,flex:1,justifyContent:"center",fontWeight:500,fontSize:12,cursor:"pointer",transition:T.tr,background:on?T.bgItem:"transparent",color:on?"#fff":T.textSecondary,border:`1px solid ${on?T.borderDefault:"transparent"}`}}><span>{t.icon}</span><span>{t.label}</span></button>;})}</div>;}
+
+  function SynergyBar({score}){const col=score>=80?T.success.text:score>=55?T.warning.text:score>=30?"#fb923c":T.error.text,lbl=score>=80?"Elite":score>=55?"Strong":score>=30?"Fair":"Weak";return <div><div style={{display:"flex",justifyContent:"space-between",marginBottom:6}}><span style={{fontSize:11,color:T.textMuted,fontWeight:600}}>Synergy Score</span><span style={{fontSize:12,fontWeight:700,color:col}}>{score} — {lbl}</span></div><div style={{height:6,background:T.bgNested,borderRadius:4,overflow:"hidden"}}><div style={{height:"100%",width:`${score}%`,background:`linear-gradient(90deg,${col}88,${col})`,borderRadius:4,transition:"width 0.5s ease"}}/></div></div>;}
+
+  function HeroCard({hero,selected,onClick}){
+    const[hov,sh]=useState(false);const rc=ROLE[hero.cls];
+    return <div onClick={onClick} onMouseEnter={()=>sh(true)} onMouseLeave={()=>sh(false)} title={`${hero.name} — ${hero.playstyle}`} style={{background:selected?`${rc}14`:T.bgItem,border:`1px solid ${selected?rc+"66":hov?T.borderHover:T.borderSubtle}`,borderRadius:12,cursor:"pointer",transition:T.tr,position:"relative",overflow:"hidden",boxShadow:selected?`0 0 18px ${rc}22`:"none"}}>
+      <div style={{height:110,overflow:"hidden",position:"relative"}}>
+        <HeroImage hero={hero} style={{width:"100%",height:"100%"}}/>
+        <div style={{position:"absolute",bottom:0,left:0,right:0,height:2,background:rc}}/>
+        <div style={{position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,0.65) 0%,transparent 55%)"}}/>
+        <div style={{position:"absolute",top:6,left:6,width:20,height:20,borderRadius:5,background:"rgba(0,0,0,0.75)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,fontWeight:800,color:TIER_CLR[hero.tier],backdropFilter:"blur(4px)"}}>{hero.tier}</div>
+        {selected&&<div style={{position:"absolute",top:6,right:6,width:20,height:20,borderRadius:"50%",background:T.green,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,color:"#fff",fontWeight:700}}>✓</div>}
+      </div>
+      <div style={{padding:"7px 8px 8px"}}>
+        <div className="ec-card-name" style={{fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700,color:T.textPrimary,lineHeight:1.2,marginBottom:5,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{hero.name}</div>
+        <div className="ec-card-label">
+          <span style={{fontSize:9,color:rc,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{ROLE_ICON[hero.cls]} {hero.cls.toUpperCase()}</span>
+          <span style={{fontSize:9,color:DIFF_CLR[hero.diff],fontWeight:600,fontFamily:"'Inter',sans-serif"}}>{hero.diff}</span>
+        </div>
+      </div>
+    </div>;
+  }
+
+  function TeamSlot({hero,onRemove}){
+    const[h,sh]=useState(false);
+    return <div onClick={onRemove} onMouseEnter={()=>sh(true)} onMouseLeave={()=>sh(false)} style={{display:"flex",alignItems:"center",padding:"8px 12px",borderRadius:10,background:T.bgItem,border:`1px solid ${h?T.borderHover:T.borderSubtle}`,cursor:"pointer",transition:T.tr,gap:12,position:"relative"}}>
+      <div style={{position:"absolute",left:0,top:6,bottom:6,width:3,background:ROLE[hero.cls],borderRadius:4}}/>
+      <div style={{marginLeft:6,width:36,height:36,borderRadius:8,overflow:"hidden",flexShrink:0}}><HeroImage hero={hero} style={{width:"100%",height:"100%"}}/></div>
+      <div style={{flex:1,minWidth:0}}><div style={{fontWeight:700,fontSize:13,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{hero.name}</div><div style={{fontSize:10,color:ROLE[hero.cls],fontWeight:600}}>{ROLE_ICON[hero.cls]} {hero.cls}</div></div>
+      <span style={{padding:"2px 7px",borderRadius:4,fontSize:10,fontWeight:700,background:T.bgNested,color:TIER_CLR[hero.tier],border:"1px solid rgba(255,255,255,0.06)"}}>{hero.tier}</span>
+      <span style={{fontSize:12,color:T.textDisabled}}>✕</span>
+    </div>;
+  }
+
+  const EmptySlot=({index})=><div style={{display:"flex",alignItems:"center",gap:12,padding:"10px 14px",borderRadius:10,border:`1px dashed ${T.borderSubtle}`,background:"rgba(255,255,255,0.01)"}}><div style={{width:36,height:36,borderRadius:8,border:`1px dashed ${T.borderDefault}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,color:T.textDisabled}}>+</div><span style={{fontSize:12,color:T.textDisabled,fontWeight:500}}>Slot {index+1} — Empty</span></div>;
+
+  function App(){
+    const[team,setTeam]=useState([]);
+    const[cls,setCls]=useState("All");
+    const[dif,setDif]=useState("All");
+    const[q,setQ]=useState("");
+    const[tab,setTab]=useState("analysis");
+    const[saved,setSaved]=useState([]);
+    const[bname,setBname]=useState("");
+    const[msg,setMsg]=useState("");
+    const[showSaved,setShowSaved]=useState(false);
+
+    useEffect(()=>{try{const u=new URL(window.location.href),tp=u.searchParams.get("team");if(tp)setTeam(decodeTeam(tp));const sv=localStorage.getItem("ec_mrb_v1");if(sv)setSaved(JSON.parse(sv));}catch{};},[]);
+
+    const toggle=useCallback((hero)=>{setTeam(p=>{if(p.find(h=>h.id===hero.id))return p.filter(h=>h.id!==hero.id);if(p.length>=6)return p;return[...p,hero];});},[]);
+
+    const save=()=>{if(!team.length)return;const name=bname.trim()||`Build ${saved.length+1}`,nb={name,team:team.map(h=>h.id),id:Date.now()},u=[...saved,nb];setSaved(u);try{localStorage.setItem("ec_mrb_v1",JSON.stringify(u));}catch{}setBname("");};
+    const load=(b)=>{setTeam(b.team.map(id=>HEROES.find(h=>h.id===id)).filter(Boolean));setShowSaved(false);};
+    const del=(id)=>{const u=saved.filter(b=>b.id!==id);setSaved(u);try{localStorage.setItem("ec_mrb_v1",JSON.stringify(u));}catch{};};
+    const share=()=>{try{const u=new URL(window.location.href);u.searchParams.set("team",encodeTeam(team));navigator.clipboard.writeText(u.toString());}catch{}setMsg("Copied!");setTimeout(()=>setMsg(""),2000);};
+
+    const filtered=HEROES.filter(h=>(cls==="All"||h.cls===cls)&&(dif==="All"||h.diff===dif)&&h.name.toLowerCase().includes(q.toLowerCase()));
+    const tus=detectTeamUps(team),{insights,recs}=getAnalysis(team),score=getSynergyScore(team);
+    const vC=team.filter(h=>h.cls==="Vanguard").length,dC=team.filter(h=>h.cls==="Duelist").length,sC=team.filter(h=>h.cls==="Strategist").length;
+    const tabs=[{id:"analysis",icon:"📊",label:"Analysis"},{id:"teamups",icon:"⚡",label:`Team-Ups (${tus.length})`},{id:"details",icon:"📋",label:"Details"}];
+    const inp={background:T.bgItem,border:`1px solid ${T.borderDefault}`,borderRadius:8,padding:"8px 14px",color:T.textPrimary,fontSize:13,transition:T.tr};
+
+    return <div style={{minHeight:"100vh",background:T.bgPage,color:T.textPrimary,position:"relative",overflowX:"hidden"}}>
+      <div style={{pointerEvents:"none",position:"fixed",inset:0,background:"radial-gradient(ellipse at 0% 0%,rgba(49,198,60,0.06),transparent 50%)",zIndex:0}}/>
+      <div style={{position:"relative",zIndex:1}}>
+
+        {/* HEADER */}
+        <div style={{borderBottom:`1px solid ${T.borderDefault}`}}>
+          <div style={{maxWidth:1700,margin:"0 auto",padding:"18px 24px"}}>
+            <div className="ec-header-inner">
+              <div style={{display:"flex",alignItems:"center",gap:14}}>
+                <IconBox size="lg" icon="⚡"/>
+                <div>
+                  <h1 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(28px,4vw,46px)",fontWeight:400,lineHeight:1.05,letterSpacing:"1px"}}>Marvel Rivals <span style={{color:T.green}}>Team Builder</span></h1>
+                  <p style={{fontFamily:"'Inter',sans-serif",fontSize:12,color:T.textSecondary,marginTop:4,fontWeight:500}}>{HEROES.length} heroes · Season 2 · Build, Analyse &amp; Dominate</p>
+                </div>
+              </div>
+              <div className="ec-header-actions">
+                <Btn variant="outline" onClick={()=>setShowSaved(!showSaved)} active={showSaved}>💾 Saved ({saved.length})</Btn>
+                {team.length>0&&<Btn variant="outline" onClick={share}>{msg||"🔗 Share Team"}</Btn>}
+                {team.length>0&&<Btn variant="ghost" onClick={()=>setTeam([])}>Clear</Btn>}
+                <a href="https://elocarry.net/cheats/marvel-rivals/" target="_blank" rel="noopener noreferrer" style={{display:"inline-flex",alignItems:"center",gap:6,background:"rgba(49,198,60,0.12)",border:"1px solid rgba(49,198,60,0.35)",color:T.green,borderRadius:8,padding:"7px 14px",fontSize:12,fontWeight:700,textDecoration:"none",whiteSpace:"nowrap"}}>🎯 Marvel Rivals Cheats →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style={{maxWidth:1700,margin:"0 auto",padding:"clamp(12px,3vw,20px) clamp(12px,3vw,24px)"}}>
+
+          {/* SAVED */}
+          {showSaved&&<div style={{marginBottom:20,animation:"ec-fadeIn 0.2s ease"}}><Card><div style={{padding:"16px 22px",borderBottom:`1px solid ${T.borderDefault}`,display:"flex",alignItems:"center",gap:12}}><IconBox size="sm" icon="💾"/><div><h2 style={{fontSize:14,fontWeight:700}}>Saved Builds</h2><p style={{fontSize:12,color:T.textSecondary,marginTop:2}}>Your saved team compositions</p></div></div><div style={{padding:"14px 22px"}}>{saved.length===0?<div style={{textAlign:"center",padding:"24px 0"}}><div style={{fontSize:36,color:T.textDisabled}}>📁</div><p style={{color:T.textSecondary,fontSize:13,marginTop:8}}>No saved builds yet</p></div>:<div style={{display:"flex",flexWrap:"wrap",gap:10}}>{saved.map(b=><div key={b.id} style={{background:T.bgItem,border:`1px solid ${T.borderDefault}`,borderRadius:10,padding:"10px 14px",display:"flex",alignItems:"center",gap:10}}><div><div style={{fontWeight:700,fontSize:13}}>{b.name}</div><div style={{fontSize:11,color:T.textSecondary,marginTop:1}}>{b.team.length} heroes</div></div><Btn variant="primary" onClick={()=>load(b)} style={{padding:"5px 12px",fontSize:11}}>Load</Btn><Btn variant="ghost" onClick={()=>del(b.id)} style={{padding:"5px 8px",fontSize:13,color:T.error.text}}>✕</Btn></div>)}</div>}</div></Card></div>}
+
+          {/* 2-COL */}
+          <div className="ec-layout">
+
+            {/* HERO GRID */}
+            <div>
+              <div className="ec-filters">
+                <input value={q} onChange={e=>setQ(e.target.value)} placeholder={`Search ${HEROES.length} heroes...`} style={{...inp,flex:1,minWidth:140,maxWidth:220}} onFocus={e=>e.target.style.borderColor=T.borderHover} onBlur={e=>e.target.style.borderColor=T.borderDefault}/>
+                {["All","Vanguard","Duelist","Strategist"].map(c=><Btn key={c} variant="outline" active={cls===c} onClick={()=>setCls(c)} style={cls===c&&c!=="All"?{borderColor:ROLE[c]+"88",color:ROLE[c]}:{}}>{c==="All"?"All Roles":`${ROLE_ICON[c]} ${c}`}</Btn>)}
+                {["All","Easy","Medium","Hard"].map(d=><Btn key={d} variant="ghost" onClick={()=>setDif(d)} style={{background:dif===d?T.bgItem:"transparent",color:dif===d?T.textPrimary:T.textMuted,border:`1px solid ${dif===d?T.borderDefault:"transparent"}`}}>{d==="All"?"Any Diff":d}</Btn>)}
+                <span style={{fontSize:11,color:T.textMuted,marginLeft:"auto"}}>{filtered.length} heroes</span>
+              </div>
+              {filtered.length>0
+                ?<div className="ec-hero-grid">{filtered.map(hero=><HeroCard key={hero.id} hero={hero} selected={!!team.find(h=>h.id===hero.id)} onClick={()=>toggle(hero)}/>)}</div>
+                :<div style={{textAlign:"center",padding:"60px 20px"}}><div style={{fontSize:48,color:T.textDisabled,marginBottom:12}}>🔍</div><p style={{color:T.textSecondary,fontSize:13}}>No heroes match your filters</p></div>
+              }
+            </div>
+
+            {/* TEAM PANEL */}
+            <div className="ec-panel">
+              <Card>
+                <div style={{padding:"16px 20px",borderBottom:`1px solid ${T.borderDefault}`}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:12}}><IconBox size="md" icon="🦸"/><div><h2 style={{fontSize:14,fontWeight:700}}>Your Team</h2><p style={{fontSize:12,color:T.textSecondary,marginTop:2}}>{team.length} / 6 selected</p></div></div>
+                    <div style={{display:"flex",gap:5}}>{["Vanguard","Duelist","Strategist"].map((c,i)=>{const cnt=[vC,dC,sC][i];return cnt>0?<span key={c} style={{fontSize:11,padding:"3px 8px",borderRadius:6,background:`${ROLE[c]}18`,border:`1px solid ${ROLE[c]}44`,color:ROLE[c],fontWeight:700}}>{ROLE_ICON[c]} {cnt}</span>:null;})}</div>
+                  </div>
+                </div>
+                <div style={{padding:"14px 18px",display:"flex",flexDirection:"column",gap:8}}>
+                  {Array.from({length:6}).map((_,i)=>team[i]?<TeamSlot key={i} hero={team[i]} onRemove={()=>toggle(team[i])}/>:<EmptySlot key={i} index={i}/>)}
+                </div>
+                {team.length>=2&&<div style={{padding:"0 18px 18px"}}>
+                  <SynergyBar score={score}/>
+                  <div style={{marginTop:12}}>
+                    <p style={{fontSize:10,color:T.textMuted,fontWeight:600,marginBottom:6}}>ROLE BALANCE</p>
+                    <div style={{display:"flex",height:5,borderRadius:3,overflow:"hidden",gap:1}}>
+                      {vC>0&&<div style={{flex:vC,background:ROLE.Vanguard,borderRadius:2,transition:T.tr}}/>}
+                      {dC>0&&<div style={{flex:dC,background:ROLE.Duelist,borderRadius:2,transition:T.tr}}/>}
+                      {sC>0&&<div style={{flex:sC,background:ROLE.Strategist,borderRadius:2,transition:T.tr}}/>}
+                      {Array.from({length:6-team.length}).map((_,i)=><div key={i} style={{flex:1,background:T.bgNested,borderRadius:2}}/>)}
+                    </div>
+                    <div style={{display:"flex",gap:12,marginTop:6}}>{["Vanguard","Duelist","Strategist"].map((c,i)=><span key={c} style={{fontSize:10,color:ROLE[c],fontWeight:600}}>{ROLE_ICON[c]} {[vC,dC,sC][i]}</span>)}</div>
+                  </div>
+                </div>}
+              </Card>
+
+              {team.length>0&&<Card><div style={{padding:"12px 16px",display:"flex",gap:8}}><input value={bname} onChange={e=>setBname(e.target.value)} placeholder="Name this build..." onKeyDown={e=>e.key==="Enter"&&save()} style={{...inp,flex:1}} onFocus={e=>e.target.style.borderColor=T.borderHover} onBlur={e=>e.target.style.borderColor=T.borderDefault}/><Btn variant="primary" onClick={save}>💾 Save</Btn></div></Card>}
+
+              {team.length>0&&<Card>
+                <div style={{padding:"12px 16px",borderBottom:`1px solid ${T.borderDefault}`}}><PillTabs tabs={tabs} active={tab} onChange={setTab}/></div>
+                <div style={{padding:"14px 18px",animation:"ec-fadeIn 0.15s ease"}}>
+                  {tab==="analysis"&&<div>
+                    <p style={{fontSize:10,color:T.textMuted,fontWeight:600,marginBottom:10,letterSpacing:0.5}}>TEAM INSIGHTS</p>
+                    {insights.length===0?<p style={{fontSize:12,color:T.textSecondary}}>Add more heroes to see analysis.</p>:<div style={{display:"flex",flexDirection:"column",gap:7}}>{insights.map((ins,i)=><div key={i} style={{background:T.bgItem,border:`1px solid ${T.borderSubtle}`,borderRadius:9,padding:"9px 13px",display:"flex",alignItems:"flex-start",gap:9}}><span style={{fontSize:13,flexShrink:0,marginTop:1}}>{ins.type==="success"?"✅":ins.type==="warning"?"⚠️":ins.type==="error"?"🔴":"ℹ️"}</span><p style={{fontSize:12,color:T.textSecondary,lineHeight:1.5}}>{ins.msg}</p></div>)}</div>}
+                    {recs.length>0&&<div style={{marginTop:14}}><p style={{fontSize:10,color:T.textMuted,fontWeight:600,marginBottom:8,letterSpacing:0.5}}>RECOMMENDATIONS</p>{recs.map((rec,i)=><div key={i} style={{background:T.bgItem,border:`1px solid ${T.borderSubtle}`,borderRadius:9,padding:"9px 13px",display:"flex",gap:9,marginBottom:5}}><span style={{color:T.green,fontWeight:700,flexShrink:0}}>→</span><p style={{fontSize:12,color:T.textSecondary,lineHeight:1.5}}>{rec}</p></div>)}</div>}
+                  </div>}
+                  {tab==="teamups"&&<div>
+                    {tus.length===0?<div style={{textAlign:"center",padding:"18px 0"}}><div style={{fontSize:32,color:T.textDisabled,marginBottom:8}}>⚡</div><p style={{fontSize:12,color:T.textSecondary,lineHeight:1.6}}>No Team-Ups active yet.<br/>Pair synergistic heroes to unlock them.</p></div>:<div style={{display:"flex",flexDirection:"column",gap:9}}>{tus.map(tu=><div key={tu.id} style={{background:T.bgItem,border:`1px solid ${T.borderSubtle}`,borderRadius:9,padding:"12px"}}><div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:7}}><span style={{fontWeight:700,fontSize:13}}>⚡ {tu.name}</span><Badge type="success">Active</Badge></div><p style={{fontSize:11,color:T.textSecondary,lineHeight:1.5,marginBottom:7}}>{tu.effect}</p><p style={{fontSize:10,color:T.textMuted,marginBottom:7}}>Triggered by:{" "}{tu.heroes.filter(h=>team.map(x=>x.name).includes(h)).map((h,i,arr)=><span key={h}><span style={{color:T.warning.text,fontWeight:600}}>{h}</span>{i<arr.length-1&&" + "}</span>)}</p><div style={{background:T.bgNested,border:`1px solid ${T.borderSubtle}`,borderRadius:5,padding:"5px 9px",fontSize:10,color:T.green,fontWeight:600}}>Impact: {tu.impact}</div></div>)}</div>}
+                    <div style={{marginTop:14}}><p style={{fontSize:10,color:T.textMuted,fontWeight:600,marginBottom:7,letterSpacing:0.5}}>MORE TEAM-UPS</p>{TEAM_UPS.filter(tu=>!tus.find(a=>a.id===tu.id)).slice(0,4).map(tu=><div key={tu.id} style={{padding:"8px 11px",marginBottom:4,borderRadius:7,background:T.bgItem,border:`1px solid ${T.borderSubtle}`}}><span style={{fontSize:12,fontWeight:600,color:T.textSecondary}}>{tu.name}</span><span style={{fontSize:11,color:T.textMuted}}> — {tu.heroes.slice(0,2).join(", ")}{tu.heroes.length>2?"…":""}</span></div>)}</div>
+                  </div>}
+                  {tab==="details"&&<div style={{display:"flex",flexDirection:"column",gap:9}}>{team.map(hero=><div key={hero.id} style={{background:T.bgItem,border:`1px solid ${T.borderSubtle}`,borderRadius:9,padding:"10px 13px"}}><div style={{display:"flex",alignItems:"center",gap:10,marginBottom:8}}><div style={{width:40,height:40,borderRadius:8,overflow:"hidden",flexShrink:0}}><HeroImage hero={hero} style={{width:"100%",height:"100%"}}/></div><div style={{flex:1,minWidth:0}}><div style={{fontWeight:700,fontSize:13}}>{hero.name}</div><div style={{fontSize:10,color:ROLE[hero.cls],fontWeight:600,marginTop:2}}>{hero.playstyle}</div></div><Badge type={hero.diff==="Easy"?"success":hero.diff==="Hard"?"error":"warning"}>{hero.diff}</Badge></div><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5}}><div style={{background:T.bgNested,borderRadius:6,padding:"6px 8px"}}><div style={{fontSize:9,color:T.success.text,fontWeight:700,marginBottom:2}}>✓ STRONG VS</div><div style={{fontSize:10,color:T.textSecondary}}>{hero.sa[0]}</div></div><div style={{background:T.bgNested,borderRadius:6,padding:"6px 8px"}}><div style={{fontSize:9,color:T.error.text,fontWeight:700,marginBottom:2}}>✗ WEAK VS</div><div style={{fontSize:10,color:T.textSecondary}}>{hero.wa[0]}</div></div></div></div>)}</div>}
+                </div>
+              </Card>}
+
+              {team.length===0&&<Card><div style={{padding:"44px 24px",textAlign:"center"}}><div style={{width:60,height:60,borderRadius:14,background:T.bgItem,margin:"0 auto 14px",display:"flex",alignItems:"center",justifyContent:"center",fontSize:26}}>⚡</div><p style={{fontWeight:700,fontSize:15,marginBottom:8}}>Select Your Roster</p><p style={{fontSize:13,color:T.textSecondary,lineHeight:1.7}}>Pick up to 6 heroes from the grid.<br/>Team-Ups, synergy scores, and full<br/>analysis will appear here.</p></div></Card>}
+            </div>
+          </div>
+
+          {/* TEAM-UP REFERENCE */}
+          <div style={{marginTop:22}}><Card>
+            <div style={{padding:"16px 22px",borderBottom:`1px solid ${T.borderDefault}`}}><div style={{display:"flex",alignItems:"center",gap:12}}><IconBox size="md" icon="⚡"/><div><h2 style={{fontSize:14,fontWeight:700}}>All Team-Up Combos</h2><p style={{fontSize:12,color:T.textSecondary,marginTop:2}}>15 synergies — active ones highlighted green</p></div></div></div>
+            <div style={{padding:"14px 22px"}}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:9}}>{TEAM_UPS.map(tu=>{const ia=!!tus.find(a=>a.id===tu.id);return <div key={tu.id} style={{background:ia?T.greenBg:T.bgItem,border:`1px solid ${ia?T.greenBorder:T.borderSubtle}`,borderRadius:9,padding:"12px",transition:T.tr}}><div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:5}}><span style={{fontWeight:700,fontSize:13,color:ia?T.green:T.textPrimary}}>{ia?"⚡ ":""}{tu.name}</span>{ia&&<Badge type="success">Active</Badge>}</div><p style={{fontSize:10,color:T.textMuted,marginBottom:5}}>{tu.heroes.join(" + ")}</p><p style={{fontSize:11,color:T.textSecondary,lineHeight:1.5}}>{tu.effect}</p></div>;})}</div></div>
+          </Card></div>
+
+          {/* PROMO */}
+          <div style={{marginTop:22}}><div style={{background:"linear-gradient(135deg,rgba(49,198,60,0.08),rgba(49,198,60,0.03))",border:"1px solid rgba(49,198,60,0.25)",borderRadius:16,padding:"24px 28px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:20,flexWrap:"wrap"}}>
+            <div><div style={{fontFamily:"'Inter',sans-serif",fontSize:11,color:T.green,fontWeight:700,letterSpacing:1,marginBottom:6}}>WANT TO WIN EVERY MATCH?</div><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:32,fontWeight:400,letterSpacing:"0.5px",marginBottom:8}}>Take your Marvel Rivals game further</h2><p style={{fontFamily:"'Inter',sans-serif",fontSize:13,color:T.textSecondary,lineHeight:1.6,maxWidth:500}}>You've built the perfect comp — now execute it flawlessly. Elocarry offers game enhancement software for Marvel Rivals and 13 other titles.</p></div>
+            <a href="https://elocarry.net/cheats/marvel-rivals/" target="_blank" rel="noopener noreferrer" style={{display:"inline-flex",alignItems:"center",gap:8,background:T.green,color:"#fff",borderRadius:10,padding:"12px 24px",fontSize:14,fontFamily:"'Inter',sans-serif",fontWeight:700,textDecoration:"none",whiteSpace:"nowrap",flexShrink:0,transition:T.tr}} onMouseEnter={e=>e.currentTarget.style.background="#34A853"} onMouseLeave={e=>e.currentTarget.style.background=T.green}>View Marvel Rivals Cheats →</a>
+          </div></div>
+
+        </div>
+      </div>
+    </div>;
+  }
+
+  const root=ReactDOM.createRoot(document.getElementById("elocarry-mrb"));
+  root.render(<App/>);
+</script>
+</body></html>
