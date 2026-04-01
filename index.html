@@ -1,41 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marvel Rivals Team Builder – Free Comp & Synergy Checker | Elocarry</title>
-  <meta name="description" content="Build the perfect Marvel Rivals team comp. Analyse role balance, team-up synergies and tier ratings across all 47 heroes. Free tool — no login required." />
-  <link rel="canonical" href="https://officialzitz.github.io/Marvel-Rivals-Team-Builder-2026/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Elocarry" />
-  <meta property="og:title" content="Marvel Rivals Team Builder – Free Comp & Synergy Checker" />
-  <meta property="og:description" content="Pick your 6 heroes, get instant synergy scores, team-up combos and role-balance analysis. Free Marvel Rivals comp tool by Elocarry." />
-  <meta property="og:url" content="https://officialzitz.github.io/Marvel-Rivals-Team-Builder-2026/" />
-  <meta property="og:image" content="https://elocarry.net/wp-content/uploads/marvel-rivals-team-builder-og.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@elocarry" />
-  <meta name="twitter:title" content="Marvel Rivals Team Builder – Free Comp & Synergy Checker" />
-  <meta name="twitter:description" content="Pick your 6 heroes, get instant synergy scores, team-up combos and role-balance analysis." />
-  <meta name="twitter:image" content="https://elocarry.net/wp-content/uploads/marvel-rivals-team-builder-og.jpg" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Marvel Rivals Team Builder",
-    "url": "https://officialzitz.github.io/Marvel-Rivals-Team-Builder-2026/",
-    "description": "Free interactive team composition builder for Marvel Rivals. Select up to 6 heroes, analyse role balance, view team-up synergies and share your comp.",
-    "applicationCategory": "GameApplication",
-    "operatingSystem": "Web",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
-    "author": { "@type": "Organization", "name": "Elocarry", "url": "https://elocarry.net" }
-  }
-  </script>
-</head>
-<body>
-
-<!-- React + Babel — self-hosted for incognito/adblocker compatibility -->
 <script src="https://elocarry.net/wp-content/uploads/2026/04/react.production.min.js"></script>
 <script src="https://elocarry.net/wp-content/uploads/2026/04/react-dom.production.min.js"></script>
 <script src="https://elocarry.net/wp-content/uploads/2026/04/babel.min.js"></script>
@@ -68,14 +30,12 @@
   @media (max-width: 768px) {
     #elocarry-mrb .ec-layout { grid-template-columns:1fr; }
     #elocarry-mrb .ec-panel { order:-1; }
-    #elocarry-mrb .ec-hero-grid { grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+    #elocarry-mrb .ec-hero-grid { grid-template-columns:repeat(auto-fill,minmax(90px,1fr)); gap:8px; }
     #elocarry-mrb .ec-header-actions a[href*="cheats"] { display:none; }
     #elocarry-mrb .ec-filters { gap:6px; }
   }
   @media (max-width: 480px) {
-    #elocarry-mrb .ec-hero-grid { grid-template-columns:repeat(2,1fr); gap:8px; }
-    #elocarry-mrb .ec-card-label span { font-size:11px !important; }
-    #elocarry-mrb .ec-card-name { font-size:13px !important; }
+    #elocarry-mrb .ec-hero-grid { grid-template-columns:repeat(auto-fill,minmax(75px,1fr)); gap:6px; }
     #elocarry-mrb { padding-bottom:20px; }
   }
   .ec-seo-block { background:#0E0E0E; border-top:1px solid rgba(255,255,255,0.06); padding:48px 24px; }
@@ -163,6 +123,7 @@
     <p style="margin-top:32px;font-size:12px;color:#475569;">
       Fan-made tool. Not affiliated with Marvel Entertainment® or NetEase Games®.
       <a href="https://elocarry.net/cheats/marvel-rivals/" style="color:#475569;">Marvel Rivals cheats</a> available at Elocarry.
+      · <a href="https://github.com/OfficialZitz/Marvel-Rivals-Team-Builder-2026" target="_blank" rel="noopener noreferrer" style="color:#475569;">View on GitHub</a>
     </p>
   </div>
 </section>
@@ -200,7 +161,7 @@
     {id:"invisible-woman",name:"Invisible Woman",cls:"Vanguard",diff:"Hard",tier:"S",playstyle:"Forcefield utility off-tank",sa:["Dive comps","Burst damage"],wa:["AoE damage","Reveal abilities"],clr:"#29b6f6",slug:"invisible-woman"},
     {id:"mister-fantastic",name:"Mister Fantastic",cls:"Vanguard",diff:"Hard",tier:"A",playstyle:"Elastic brawler / zone controller",sa:["Melee fighters","Grouped enemies"],wa:["Ranged comps","Crowd control"],clr:"#0288d1",slug:"mister-fantastic"},
     {id:"bruce-banner",name:"Bruce Banner",cls:"Vanguard",diff:"Medium",tier:"A",playstyle:"Transforming tank — Hulk on trigger",sa:["Single targets","Squishies"],wa:["Burst before transform","Poke"],clr:"#2e7d32",slug:"bruce-banner"},
-    {id:"namor",name:"Namor",cls:"Vanguard",diff:"Medium",tier:"B",playstyle:"Aquatic brawler / spawn controller",sa:["Ground-based tanks","Clustered"],wa:["Anti-air","High burst divers"],clr:"#006064",slug:"namor"},
+    {id:"namor",name:"Namor",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Aquatic brawler / spawn controller",sa:["Ground-based tanks","Clustered"],wa:["Anti-air","High burst divers"],clr:"#006064",slug:"namor"},
     {id:"iron-man",name:"Iron Man",cls:"Duelist",diff:"Medium",tier:"S",playstyle:"Mobile aerial damage dealer",sa:["Slow tanks","Clustered enemies"],wa:["Anti-air","High-mobility assassins"],clr:"#c0392b",slug:"iron-man"},
     {id:"spider-man",name:"Spider-Man",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"High-mobility flank diver",sa:["Isolated backline","Slow supports"],wa:["CC-heavy comps","Peni Parker"],clr:"#1565c0",slug:"spider-man"},
     {id:"black-panther",name:"Black Panther",cls:"Duelist",diff:"Hard",tier:"S",playstyle:"Vibranium high-skill assassin",sa:["Isolated backliners","Supports"],wa:["CC-heavy tanks","Group peel"],clr:"#6a1b9a",slug:"black-panther"},
@@ -210,25 +171,25 @@
     {id:"blade",name:"Blade",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Lifesteal melee diver",sa:["Single targets","Supports"],wa:["AoE damage","CC comps"],clr:"#37474f",slug:"blade"},
     {id:"deadpool",name:"Deadpool",cls:"Duelist",diff:"Medium",tier:"A",playstyle:"Regenerating brawler / disruptor",sa:["Sustained fight comps","Dive"],wa:["Burst one-shots","Hard CC"],clr:"#c62828",slug:"deadpool"},
     {id:"elsa-bloodstone",name:"Elsa Bloodstone",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Monster hunter / sustained marksman",sa:["Large hitbox targets","Tanks"],wa:["High-mobility targets","Shields"],clr:"#ad1457",slug:"elsa-bloodstone"},
-    {id:"gambit",name:"Gambit",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"Explosive kinetic card caster",sa:["Grouped enemies","Close-range tanks"],wa:["Long-range comps","Mobile targets"],clr:"#7b1fa2",slug:"gambit"},
+    {id:"gambit",name:"Gambit",cls:"Strategist",diff:"Hard",tier:"A",playstyle:"Explosive kinetic card caster",sa:["Grouped enemies","Close-range tanks"],wa:["Long-range comps","Mobile targets"],clr:"#7b1fa2",slug:"gambit"},
     {id:"hawkeye",name:"Hawkeye",cls:"Duelist",diff:"Hard",tier:"S",playstyle:"Precision long-range sniper",sa:["Stationary targets","Low-health"],wa:["Dive comps","Close-range brawlers"],clr:"#37474f",slug:"hawkeye"},
     {id:"hela",name:"Hela",cls:"Duelist",diff:"Medium",tier:"A",playstyle:"Ranged aerial bone spike caster",sa:["Grouped targets","Low-mobility"],wa:["Shields","High-mobility divers"],clr:"#1b5e20",slug:"hela"},
     {id:"human-torch",name:"Human Torch",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Aerial pyro zone burner",sa:["Groot","Ground-based tanks"],wa:["Anti-air","Long-range snipers"],clr:"#e65100",slug:"human-torch"},
     {id:"iron-fist",name:"Iron Fist",cls:"Duelist",diff:"Hard",tier:"B",playstyle:"Chi-powered melee assassin",sa:["Supports","Isolated targets"],wa:["AoE poke","CC-heavy tanks"],clr:"#33691e",slug:"iron-fist"},
-    {id:"angela",name:"Angela",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"Aggressive melee dive fighter",sa:["Backliners","Isolated targets"],wa:["CC comps","Burst damage"],clr:"#f9a825",slug:"angela"},
+    {id:"angela",name:"Angela",cls:"Vanguard",diff:"Hard",tier:"A",playstyle:"Aggressive melee dive fighter",sa:["Backliners","Isolated targets"],wa:["CC comps","Burst damage"],clr:"#f9a825",slug:"angela"},
     {id:"moon-knight",name:"Moon Knight",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Lunar-powered versatile skirmisher",sa:["Grouped enemies","Predictable tanks"],wa:["Sustained burst","High mobility"],clr:"#eceff1",slug:"moon-knight"},
     {id:"daredevil",name:"Daredevil",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"Radar-sense melee assassin",sa:["Low-health backliners","Supports"],wa:["AoE damage","Hard CC"],clr:"#b71c1c",slug:"daredevil"},
     {id:"magik",name:"Magik",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"Portal teleport assassin",sa:["Isolated supports","Low-health"],wa:["Burst comps","AoE CC"],clr:"#4527a0",slug:"magik"},
-    {id:"emma-frost",name:"Emma Frost",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Diamond form brawler / telepath",sa:["Ability-reliant heroes","Supports"],wa:["Sustained physical dmg","Burn"],clr:"#b0bec5",slug:"emma-frost"},
+    {id:"emma-frost",name:"Emma Frost",cls:"Vanguard",diff:"Medium",tier:"B",playstyle:"Diamond form brawler / telepath",sa:["Ability-reliant heroes","Supports"],wa:["Sustained physical dmg","Burn"],clr:"#b0bec5",slug:"emma-frost"},
     {id:"psylocke",name:"Psylocke",cls:"Duelist",diff:"Hard",tier:"S",playstyle:"Psionic blade diver / burst assassin",sa:["Isolated targets","Low-health supports"],wa:["AoE poke","Hard CC"],clr:"#6a1b9a",slug:"psylocke"},
     {id:"phoenix",name:"Phoenix",cls:"Duelist",diff:"Hard",tier:"S",playstyle:"Cosmic burst mage / resurrection",sa:["Grouped enemies","Ability-reliant"],wa:["Burst before ult","Silences"],clr:"#e65100",slug:"phoenix"},
     {id:"star-lord",name:"Star-Lord",cls:"Duelist",diff:"Easy",tier:"B",playstyle:"Dual-pistol mobile skirmisher",sa:["Medium-range targets","Supports"],wa:["Long-range snipers","Shield tanks"],clr:"#e53935",slug:"star-lord"},
-    {id:"rogue",name:"Rogue",cls:"Duelist",diff:"Medium",tier:"A",playstyle:"Power-stealing melee brawler",sa:["Ability-reliant heroes","Tanks"],wa:["Ranged burst","CC comps"],clr:"#1b5e20",slug:"rogue"},
+    {id:"rogue",name:"Rogue",cls:"Vanguard",diff:"Medium",tier:"A",playstyle:"Power-stealing melee brawler",sa:["Ability-reliant heroes","Tanks"],wa:["Ranged burst","CC comps"],clr:"#1b5e20",slug:"rogue"},
     {id:"wolverine",name:"Wolverine",cls:"Duelist",diff:"Easy",tier:"A",playstyle:"Adamantium regen brawler diver",sa:["Supports","Attrition fights"],wa:["Burst one-shots","Hard CC"],clr:"#f57f17",slug:"wolverine"},
     {id:"winter-soldier",name:"Winter Soldier",cls:"Duelist",diff:"Medium",tier:"B",playstyle:"Arm-cannon burst skirmisher",sa:["Medium-range targets","Low-health"],wa:["Long-range snipers","Dive comps"],clr:"#37474f",slug:"winter-soldier"},
     {id:"squirrel-girl",name:"Squirrel Girl",cls:"Duelist",diff:"Easy",tier:"B",playstyle:"Acorn-lobbing area poke dealer",sa:["Stationary targets","Tanks"],wa:["Mobile targets","Shields"],clr:"#8d6e63",slug:"squirrel-girl"},
-    {id:"cloak-dagger",name:"Cloak & Dagger",cls:"Duelist",diff:"Hard",tier:"A",playstyle:"Dual-mode burst / utility hybrid",sa:["Grouped enemies","Low-health"],wa:["Sustained tanks","Heavy CC"],clr:"#4a148c",slug:"cloak-dagger"},
-    {id:"ultron",name:"Ultron",cls:"Duelist",diff:"Medium",tier:"A",playstyle:"Swarming drone AI dealer",sa:["Grouped enemies","Supports"],wa:["Point-blank brawlers","Hard CC"],clr:"#455a64",slug:"ultron"},
+    {id:"cloak-dagger",name:"Cloak & Dagger",cls:"Strategist",diff:"Hard",tier:"A",playstyle:"Dual-mode burst / utility hybrid",sa:["Grouped enemies","Low-health"],wa:["Sustained tanks","Heavy CC"],clr:"#4a148c",slug:"cloak-dagger"},
+    {id:"ultron",name:"Ultron",cls:"Strategist",diff:"Medium",tier:"A",playstyle:"Swarming drone AI dealer",sa:["Grouped enemies","Supports"],wa:["Point-blank brawlers","Hard CC"],clr:"#455a64",slug:"ultron"},
     {id:"mantis",name:"Mantis",cls:"Strategist",diff:"Easy",tier:"S",playstyle:"Empathic healer / damage amplifier",sa:["Attrition battles","Burst-heavy comps"],wa:["Burst assassins","Dive comps"],clr:"#558b2f",slug:"mantis"},
     {id:"rocket-raccoon",name:"Rocket Raccoon",cls:"Strategist",diff:"Medium",tier:"A",playstyle:"Technical support / turret engineer",sa:["Stationary tanks","Bunkers"],wa:["Divers","Close assassins"],clr:"#bf360c",slug:"rocket-raccoon"},
     {id:"loki",name:"Loki",cls:"Strategist",diff:"Hard",tier:"A",playstyle:"Deceptive support / clone disruptor",sa:["Target-dependent enemies"],wa:["AoE damage","Reveal abilities"],clr:"#1b5e20",slug:"loki"},
@@ -353,7 +314,7 @@
         {selected&&<div style={{position:"absolute",top:6,right:6,width:20,height:20,borderRadius:"50%",background:T.green,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,color:"#fff",fontWeight:700}}>✓</div>}
       </div>
       <div style={{padding:"7px 8px 8px"}}>
-        <div className="ec-card-name" style={{fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700,color:T.textPrimary,lineHeight:1.2,marginBottom:5,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{hero.name}</div>
+        <div style={{fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700,color:T.textPrimary,lineHeight:1.2,marginBottom:5,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{hero.name}</div>
         <div className="ec-card-label">
           <span style={{fontSize:9,color:rc,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{ROLE_ICON[hero.cls]} {hero.cls.toUpperCase()}</span>
           <span style={{fontSize:9,color:DIFF_CLR[hero.diff],fontWeight:600,fontFamily:"'Inter',sans-serif"}}>{hero.diff}</span>
@@ -418,6 +379,7 @@
               </div>
               <div className="ec-header-actions">
                 <Btn variant="outline" onClick={()=>setShowSaved(!showSaved)} active={showSaved}>💾 Saved ({saved.length})</Btn>
+                <a href="https://github.com/OfficialZitz/Marvel-Rivals-Team-Builder-2026" target="_blank" rel="noopener noreferrer" style={{display:"inline-flex",alignItems:"center",gap:6,background:"transparent",border:`1px solid ${T.borderDefault}`,color:T.textSecondary,borderRadius:8,padding:"7px 14px",fontSize:12,fontWeight:600,textDecoration:"none",whiteSpace:"nowrap",transition:T.tr}} onMouseEnter={e=>{e.currentTarget.style.borderColor=T.borderHover;e.currentTarget.style.color="#fff"}} onMouseLeave={e=>{e.currentTarget.style.borderColor=T.borderDefault;e.currentTarget.style.color=T.textSecondary}}>⭐ Star on GitHub</a>
                 {team.length>0&&<Btn variant="outline" onClick={share}>{msg||"🔗 Share Team"}</Btn>}
                 {team.length>0&&<Btn variant="ghost" onClick={()=>setTeam([])}>Clear</Btn>}
                 <a href="https://elocarry.net/cheats/marvel-rivals/" target="_blank" rel="noopener noreferrer" style={{display:"inline-flex",alignItems:"center",gap:6,background:"rgba(49,198,60,0.12)",border:"1px solid rgba(49,198,60,0.35)",color:T.green,borderRadius:8,padding:"7px 14px",fontSize:12,fontWeight:700,textDecoration:"none",whiteSpace:"nowrap"}}>🎯 Marvel Rivals Cheats →</a>
@@ -517,4 +479,3 @@
   const root=ReactDOM.createRoot(document.getElementById("elocarry-mrb"));
   root.render(<App/>);
 </script>
-</body></html>
